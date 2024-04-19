@@ -1,4 +1,4 @@
-package dev.jcsaben.custlink;
+package dev.jcasben.custlink;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

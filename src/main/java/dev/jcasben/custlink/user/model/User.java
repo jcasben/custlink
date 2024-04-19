@@ -1,4 +1,4 @@
-package dev.jcsaben.custlink.user.model;
+package dev.jcasben.custlink.user.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -14,11 +14,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collation = "users")
+@Document(collection = "user")
 public class User implements UserDetails {
     @Id
-    private String email;
+    private String id;
     private String username;
+    private String nick;
     private String password;
 
 

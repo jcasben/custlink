@@ -1,4 +1,4 @@
-package dev.jcsaben.custlink.link.model;
+package dev.jcasben.custlink.link.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

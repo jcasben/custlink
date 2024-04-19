@@ -1,4 +1,4 @@
-package dev.jcsaben.custlink;
+package dev.jcasben.custlink;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
