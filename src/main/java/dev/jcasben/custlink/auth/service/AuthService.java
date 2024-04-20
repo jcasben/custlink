@@ -34,7 +34,7 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
         User user = User.builder()
                 .username(request.getUsername())
-                .nick(request.getNick())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userRepository.save(user);
