@@ -19,7 +19,7 @@ public class User implements UserDetails {
     @Id
     private String id;
     private String username;
-    private String nick;
+    private String email;
     private String password;
 
 
