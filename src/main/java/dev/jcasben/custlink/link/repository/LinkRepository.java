@@ -3,8 +3,10 @@ package dev.jcasben.custlink.link.repository;
 import dev.jcasben.custlink.link.model.Link;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface LinkRepository extends MongoRepository<Link, String> {
-    Optional<Link> findAllByOwner(String owner);
+    List<Link> findAllByOwner(String owner);
+    Link findByOwnerAndName(String owner, String name);
+    void deleteByOwnerAndName(String owner, String name);
 }
