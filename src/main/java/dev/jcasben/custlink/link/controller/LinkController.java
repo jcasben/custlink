@@ -17,48 +17,47 @@ import java.util.List;
 public class LinkController {
 
     private final LinkService linkService;
-    private final UserService userService;
     private final JwtService jwtService;
 
-    @PostMapping("{owner}/createLink")
+    @PostMapping("/createLink")
     public ResponseEntity<Link> createLink(
-            @PathVariable("owner") String owner,
-            @RequestBody Link link
+            @RequestBody Link link,
+            @RequestHeader("Authorization") String token
     ) {
-        if (userService.existsUserByUsername(owner)) {
-            link.setOwner(owner);
-            Link newLink = linkService.createLink(link);
-            return new ResponseEntity<>(newLink, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        link.setOwner(jwtService.getUsernameFromRawToken(token));
+        Link newLink = linkService.createLink(link);
+        return new ResponseEntity<>(newLink, HttpStatus.CREATED);
     }
 
     @GetMapping("/links")
-    public ResponseEntity<List<Link>> getAllLinksByOwner(@RequestHeader("Authorization") String token) {
-        String owner = jwtService.getUsernameFromToken(token.substring(7));
-        List<Link> links = linkService.findAllLinksByOwner(owner);
+    public ResponseEntity<List<Link>> getAllLinksByOwner(
+            @RequestHeader("Authorization") String token
+    ) {
+        List<Link> links = linkService.findAllLinksByOwner(
+                jwtService.getUsernameFromRawToken(token)
+        );
         return new ResponseEntity<>(links, HttpStatus.OK);
     }
 
-    @PutMapping("{owner}/update/{name}")
+    @PutMapping("/update/{name}")
     public ResponseEntity<Link> updateLink(
-            @PathVariable("owner") String owner,
-            @RequestBody Link link
+            @RequestBody Link link,
+            @RequestHeader("Authorization") String token
     ) {
-        if (userService.existsUserByUsername(owner)) {
-            link.setOwner(owner);
-            Link updatedLink = linkService.updateLink(link);
-            return new ResponseEntity<>(updatedLink, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        link.setOwner(jwtService.getUsernameFromRawToken(token));
+        Link updatedLink = linkService.updateLink(link);
+        return new ResponseEntity<>(updatedLink, HttpStatus.OK);
     }
 
-    @DeleteMapping("{owner}/delete/{name}")
+    @DeleteMapping("/delete/{name}")
     public ResponseEntity<?> deleteLink(
-            @PathVariable("owner") String owner,
-            @PathVariable("name") String name
+            @PathVariable("name") String name,
+            @RequestHeader("Authorization") String token
     ) {
-        linkService.deleteLinkByOwnerAndName(owner, name);
+        linkService.deleteLinkByOwnerAndName(
+                jwtService.getUsernameFromRawToken(token),
+                name
+        );
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
