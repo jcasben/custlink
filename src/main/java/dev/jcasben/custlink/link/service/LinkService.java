@@ -25,8 +25,8 @@ public class LinkService {
         return linkRepository.findAllByOwner(owner);
     }
 
-    public Link updateLink(String owner, String name, Link link) {
-        return linkRepository.updateLinkByOwnerAndName(owner, name, link);
+    public Link updateLink(Link link) {
+        return linkRepository.save(link);
     }
 
     public void deleteLinkByOwnerAndName(String owner, String name) {

@@ -3,7 +3,6 @@ package dev.jcasben.custlink.link.controller;
 import dev.jcasben.custlink.jwt.JwtService;
 import dev.jcasben.custlink.link.model.Link;
 import dev.jcasben.custlink.link.service.LinkService;
-import dev.jcasben.custlink.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +38,18 @@ public class LinkController {
         return new ResponseEntity<>(links, HttpStatus.OK);
     }
 
+    @GetMapping("/find/{name}")
+    public ResponseEntity<Link> getLinkByName(
+            @PathVariable("name") String name,
+            @RequestHeader("Authorization") String token
+    ) {
+        Link link = linkService.findLinkByOwnerAndName(
+                jwtService.getUsernameFromRawToken(token),
+                name
+        );
+        return new ResponseEntity<>(link, HttpStatus.OK);
+    }
+
     @PutMapping("/update/{name}")
     public ResponseEntity<Link> updateLink(
             @RequestBody Link link,
@@ -46,8 +57,10 @@ public class LinkController {
             @RequestHeader("Authorization") String token
     ) {
         String owner = jwtService.getUsernameFromRawToken(token);
-        link.setOwner(owner);
-        Link updatedLink = linkService.updateLink(owner, name, link);
+        Link toUpdate = linkService.findLinkByOwnerAndName(owner, name);
+        toUpdate.setUrl(link.getUrl());
+        toUpdate.setName(link.getName());
+        Link updatedLink = linkService.updateLink(toUpdate);
         return new ResponseEntity<>(updatedLink, HttpStatus.OK);
     }
 
