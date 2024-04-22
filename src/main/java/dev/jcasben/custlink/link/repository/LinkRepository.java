@@ -9,4 +9,5 @@ public interface LinkRepository extends MongoRepository<Link, String> {
     List<Link> findAllByOwner(String owner);
     Link findByOwnerAndName(String owner, String name);
     void deleteByOwnerAndName(String owner, String name);
+    Link updateLinkByOwnerAndName(String owner, String name, Link link);
 }

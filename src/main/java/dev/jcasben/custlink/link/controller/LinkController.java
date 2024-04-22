@@ -42,10 +42,12 @@ public class LinkController {
     @PutMapping("/update/{name}")
     public ResponseEntity<Link> updateLink(
             @RequestBody Link link,
+            @PathVariable("name") String name,
             @RequestHeader("Authorization") String token
     ) {
-        link.setOwner(jwtService.getUsernameFromRawToken(token));
-        Link updatedLink = linkService.updateLink(link);
+        String owner = jwtService.getUsernameFromRawToken(token);
+        link.setOwner(owner);
+        Link updatedLink = linkService.updateLink(owner, name, link);
         return new ResponseEntity<>(updatedLink, HttpStatus.OK);
     }
 
