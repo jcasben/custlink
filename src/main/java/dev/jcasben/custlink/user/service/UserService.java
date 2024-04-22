@@ -18,19 +18,19 @@ public class UserService {
         );
     }
 
-    public User updateUser(String username, User user) {
-        return userRepository.updateUserByUsername(username, user);
-    }
+//    public User updateUser(String username, User user) {
+//        return userRepository.updateByUsername(username, user);
+//    }
 
     public void deleteUserByUsername(String username) {
-        userRepository.deleteUserByUsername(username);
+        userRepository.deleteByUsername(username);
     }
 
-    public boolean existsUserByUsername(String username) {
-        return userRepository.existsUserByUsername(username);
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
     }
 
-    public boolean existsUserByEmail(String email) {
-        return userRepository.existsUserByEmail(email);
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }
