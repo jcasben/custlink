@@ -25,7 +25,6 @@ public class RedirectController {
             @PathVariable("name") String name
     ) {
         Link link = linkService.findLinkByOwnerAndName(owner, name);
-        System.out.println(link.toString());
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(link.getUrl()))
                 .build();
