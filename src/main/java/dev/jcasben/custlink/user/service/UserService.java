@@ -18,12 +18,12 @@ public class UserService {
         );
     }
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public User updateUser(String username, User user) {
+        return userRepository.updateUserByUsername(username, user);
     }
 
     public void deleteUserByUsername(String username) {
-        userRepository.deleteByUsername(username);
+        userRepository.deleteUserByUsername(username);
     }
 
     public boolean existsUserByUsername(String username) {
