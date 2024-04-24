@@ -18,18 +18,28 @@ public class UserController {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
-//    @PutMapping("update")
-//    public ResponseEntity<User> updateUser(
-//            @RequestBody User user,
-//            @RequestHeader("Authorization") String token
-//    ) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        User newUser = userService.updateUser(
-//                jwtService.getUsernameFromRawToken(token),
-//                user
-//        );
-//        return new ResponseEntity<>(newUser, HttpStatus.OK);
-//    }
+    @PutMapping("updatePassword")
+    public ResponseEntity<User> updateUser(
+            @RequestBody User user,
+            @RequestHeader("Authorization") String token
+    ) {
+        User oldUser = userService.findUserByUsername(
+                jwtService.getUsernameFromRawToken(token)
+        );
+        oldUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        User newUser = userService.updateUser(oldUser);
+        return new ResponseEntity<>(newUser, HttpStatus.OK);
+    }
+
+    @GetMapping("user")
+    public ResponseEntity<User> getUser(
+            @RequestHeader("Authorization") String token
+    ) {
+        User user = userService.findUserByUsername(
+                jwtService.getUsernameFromRawToken(token)
+        );
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 
     @DeleteMapping("delete")
     public void deleteUser(@RequestHeader("Authorization") String token) {
