@@ -18,9 +18,9 @@ public class UserService {
         );
     }
 
-//    public User updateUser(String username, User user) {
-//        return userRepository.updateByUsername(username, user);
-//    }
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
 
     public void deleteUserByUsername(String username) {
         userRepository.deleteByUsername(username);
