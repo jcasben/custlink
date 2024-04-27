@@ -23,3 +23,21 @@ This project is composed of a frontend and a backend. See the frontend repositor
 - Users can create an account and log in.
 - Users can create, update and delete their links.
 - Users can share their links with other people to redirect them to other page.
+
+## What I've learned
+
+During this project I learned lot of things about how web applications work and I also added new technologies to my stack.
+
+### 💪 Building secure APIs
+
+- For this project I needed secure endpoint that required authentication with JWT. My next step will be learning
+to authorize this endpoint user OAuth.
+
+### 🧠 Better understanding of Web
+
+- Thanks to this project I reinforced my knowledge about how web applications work, and it makes want to know even more
+to produce more professional products.
+
+## ✏️ Author
+
+- Jesus Castillo (@jcasben)
