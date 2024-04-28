@@ -5,7 +5,9 @@ an account and manage their links from there.
 
 This project is composed of a frontend and a backend. See the frontend repository [here](https://github.com/jcasben/custlink-web)
 
-DISCLAIMER: this project worked perfectly during all the development but currently is not working in production due to CORS errors
+DISCLAIMER: this project worked perfectly during all the development but currently is not working in production due to CORS errors.
+
+**OUT OF TIME CHANGE**: finally the project worked. Sorry for changing this README out of time
 
 ## 📦 Technologies
 
